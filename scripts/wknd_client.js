@@ -112,13 +112,13 @@ function render(){
       // Xconsole.log('employee i#', i)
       $('.staff-table').append(`
       <tr id='${i}'>
-        <td>${staff[i].first}</td>
-        <td>${staff[i].last}</td>
-        <td>${staff[i].id}</td>
-        <td>${staff[i].title}</td>
-        <td>${staff[i].salary}</td>
-        <td>
-          <button class="deleteBtn">
+        <td class='staff-table-entry'>${staff[i].first}</td>
+        <td class='staff-table-entry'>${staff[i].last}</td>
+        <td class='staff-table-entry'>${staff[i].id}</td>
+        <td class='staff-table-entry'>${staff[i].title}</td>
+        <td class='staff-sal-entry'>$ ${staff[i].salary}</td>
+        <td class='staff-table-entry'>
+          <button class='deleteBtn'>
           Delete Employee
           </button>
         </td>

@@ -15,3 +15,12 @@ td {
 div {
     padding-top: 10px;
 }
+
+.staff-table-entry {
+    background-color: white;
+}
+
+.staff-sal-entry {
+    text-align: right;
+    background-color: white;
+}
