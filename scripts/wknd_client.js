@@ -1,3 +1,6 @@
+// note - Xconsole.log indicates console used for testing and found to be 
+// working as expected.
+
 $(document).ready(readyNow);
 
 // starter variables:
@@ -9,7 +12,7 @@ function readyNow() {
 
   // click event handler that calls the different functions
   $('#addEmployeeBtn').on('click', addEmployee);
-  $('.cars-table').on('click', '.deleteBtn', deleteCar);
+
 } // end readyNow
 
 
@@ -50,9 +53,10 @@ function addEmployee() {
 
   } else {
     // pop up alert to annoy users
-    alert('Please fill out all fields provided');
+    // alert('Please fill out all fields provided');
 
   }
+
   // Xtesting input
   // console.log('Your employee:', employee)
   // console.log(`Employee object status, easy reading version:
@@ -68,8 +72,11 @@ function addEmployee() {
   // Xtesting
   // console.log('Staff ATM:', staff)
 
+  // rendering of DOM
+  render();
 
 } // end addEmployee
+
 
 function resetInputFields(){
   // clear inputs
@@ -79,3 +86,21 @@ function resetInputFields(){
   $('#titleInput').val('');
   $('#salaryInput').val('');
 } // end resetInputFields
+
+function render(){
+  // Xconsole.log('Inside render.')
+
+  // to do.
+  // update the DOM
+  // empty table and recreate headers
+  $('.staff-table').empty()
+  $('.staff-table').append(`
+    <tr>
+      <td>First Name</td>
+      <td>Last Name</td>
+  `)
+
+  
+  // loop through staff and add employees to table.
+
+}
