@@ -6,13 +6,17 @@ $(document).ready(readyNow);
 // starter variables:
 // employee object array
 let staff = [];
+let salaryTotal = 0;
 
 function readyNow() {
   console.log("DOM is locked, rocked, and ready to pop!");
 
-  // click event handler that calls the different functions
+  // click event handler for adding employee (static)
   $('#addEmployeeBtn').on('click', addEmployee);
-
+  // click event handler for removing employee (dynamic)
+  $('.staff-table').on('click', '.deleteBtn', pinkSlipper);
+  // initial render
+  render()
 } // end readyNow
 
 
@@ -46,8 +50,8 @@ function addEmployee() {
 
     // push to global staff variable
     staff.push(employee);
-    console.log('employee being pushed:', employee)
-    console.log('staff is now:', staff)
+    // Xconsole.log('employee being pushed:', employee)
+    // Xconsole.log('staff is now:', staff)
 
     // reset inputs
     resetInputFields()
@@ -62,11 +66,11 @@ function addEmployee() {
   // Xtesting input
   // console.log('Employee Added:', employee)
   console.log(`First staff object status, easy reading version:
-    First Name: ${staff.first}
-    Last Name: ${staff.last}
-    ID: ${staff.id}
-    Title: ${staff.title}
-    Salary: ${staff.salary}
+    First Name: ${staff[0].first}
+    Last Name: ${staff[0].last}
+    ID: ${staff[0].id}
+    Title: ${staff[0].title}
+    Salary: ${staff[0].salary}
   `)
   
   
@@ -79,6 +83,28 @@ function addEmployee() {
 
 } // end addEmployee
 
+function pinkSlipper() {
+  // Xconsole.log('inside remove employee.');
+  
+  let newStaffRoster = []
+  let employeeToRemove = Number ($(this).parent().parent().attr('id'));
+  // playing with finding things dynamically.
+  // console.log('this is', $(this))
+  // console.log('This id is', $(this).parent().parent().attr('id'))
+  for (i=0; i<staff.length; i++) {
+    if (employeeToRemove !== i) {
+      console.log('Staff with internal ID', employeeToRemove, 'will be removed');
+      newStaffRoster.push(staff[i]);
+    }
+  }
+  // change staff to reflect the new order
+  staff = newStaffRoster;
+
+  // console.log('Staff is now', staff);
+  
+  // render staff without the removed employee.
+  render()
+}
 
 function resetInputFields(){
   // clear inputs
@@ -94,19 +120,7 @@ function render(){
 
   // to do.
   // update the DOM
-  // empty table and recreate headers
-  $('.staff-table').empty()
-  $('.staff-table').append(`
-    <tr>
-      <td>First Name</td>
-      <td>Last Name</td>
-      <td>ID</td>
-      <td>Title</td>
-      <td>Annual Salary</td>
-      <td>Remove Employee</td>
-    </tr>
-  `)
-
+  setUpTable();
   // loop through staff to add employees to table.
     for (let i=0; i<staff.length; i++) {
       // Xconsole.log('employee i#', i)
@@ -126,4 +140,36 @@ function render(){
       `
     )}
 
+  setUpTotalSalary();
+}
+
+function setUpTable() {
+  // empty table and recreate headers
+  $('.staff-table').empty()
+  $('.staff-table').append(`
+    <tr>
+      <td>First Name</td>
+      <td>Last Name</td>
+      <td>ID</td>
+      <td>Title</td>
+      <td>Annual Salary</td>
+      <td>Remove Employee</td>
+    </tr>
+  `)
+
+}
+
+function setUpTotalSalary() {
+  console.log('inside setUpTotalSalary');
+  let salaryAmount = 0
+
+  for (employee of staff) {  
+    salaryAmount += Number(employee.salary);
+    console.log('Salary is', salaryAmount)
+  }
+  // pull combined salary's into total variable.
+  // may not be needed.
+  $('#totalSalary').html(`
+  <h3 id="totalSalary">Total Monthly: $${salaryAmount}.00</h3>
+  `)
 }
