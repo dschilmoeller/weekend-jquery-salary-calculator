@@ -36,16 +36,18 @@ function addEmployee() {
     && employeeTitle 
     && employeeTitle ) {
   // create object to hold variables entered
-    let employee = [ {
+    let employee = {
       first: employeeFirstName,
       last: employeeLastName,
       id: employeeID,
       title: employeeTitle,
       salary: employeeSalary
-    }];
+    };
 
     // push to global staff variable
     staff.push(employee);
+    console.log('employee being pushed:', employee)
+    console.log('staff is now:', staff)
 
     // reset inputs
     resetInputFields()
@@ -58,14 +60,14 @@ function addEmployee() {
   }
 
   // Xtesting input
-  // console.log('Your employee:', employee)
-  // console.log(`Employee object status, easy reading version:
-  //   First Name: ${employee[0].first}
-  //   Last Name: ${employee[0].last}
-  //   ID: ${employee[0].id}
-  //   Title: ${employee[0].title}
-  //   Salary: ${employee[0].salary}
-  // `)
+  // console.log('Employee Added:', employee)
+  console.log(`First staff object status, easy reading version:
+    First Name: ${staff.first}
+    Last Name: ${staff.last}
+    ID: ${staff.id}
+    Title: ${staff.title}
+    Salary: ${staff.salary}
+  `)
   
   
 
@@ -98,9 +100,30 @@ function render(){
     <tr>
       <td>First Name</td>
       <td>Last Name</td>
+      <td>ID</td>
+      <td>Title</td>
+      <td>Annual Salary</td>
+      <td>Remove Employee</td>
+    </tr>
   `)
 
-  
-  // loop through staff and add employees to table.
+  // loop through staff to add employees to table.
+    for (let i=0; i<staff.length; i++) {
+      // Xconsole.log('employee i#', i)
+      $('.staff-table').append(`
+      <tr id='${i}'>
+        <td>${staff[i].first}</td>
+        <td>${staff[i].last}</td>
+        <td>${staff[i].id}</td>
+        <td>${staff[i].title}</td>
+        <td>${staff[i].salary}</td>
+        <td>
+          <button class="deleteBtn">
+          Delete Employee
+          </button>
+        </td>
+      </tr>
+      `
+    )}
 
 }
