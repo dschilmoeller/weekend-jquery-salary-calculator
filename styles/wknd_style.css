@@ -1,0 +1,15 @@
+table, td {
+    font-size: 18px;
+    border: 1px solid black;
+}
+
+.tableHeaders {
+    padding: 8px 30px;
+    background-color: lightgray;
+    border: 1px solid black;
+    min-width: 3em;
+}
+
+div {
+    padding-top: 10px;
+}
