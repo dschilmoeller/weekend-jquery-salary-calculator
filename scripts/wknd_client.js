@@ -1,6 +1,10 @@
 // note - Xconsole.log indicates console used for testing and found to be 
 // working as expected.
 
+// To Do
+// Change annual salary to display commas w/ Regex in setUpTotalSalary
+// 
+
 $(document).ready(readyNow);
 
 // starter variables:
@@ -32,6 +36,7 @@ function addEmployee() {
   employeeID = $('#idInput').val(); 
   employeeTitle = $('#titleInput').val();
   employeeSalary = $('#salaryInput').val();
+  
   
   // check inputs have values:
   if (employeeFirstName 
@@ -124,13 +129,14 @@ function render(){
   // loop through staff to add employees to table.
     for (let i=0; i<staff.length; i++) {
       // Xconsole.log('employee i#', i)
+      moddedEmployeeSalary = staff[i].salary.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
       $('.staff-table').append(`
       <tr id='${i}'>
         <td class='staff-table-entry'>${staff[i].first}</td>
         <td class='staff-table-entry'>${staff[i].last}</td>
         <td class='staff-table-entry'>${staff[i].id}</td>
         <td class='staff-table-entry'>${staff[i].title}</td>
-        <td class='staff-sal-entry'>$ ${staff[i].salary}</td>
+        <td class='staff-sal-entry'>$ ${moddedEmployeeSalary}</td>
         <td class='staff-table-entry'>
           <button class='deleteBtn'>
           Delete Employee
@@ -160,16 +166,26 @@ function setUpTable() {
 }
 
 function setUpTotalSalary() {
-  console.log('inside setUpTotalSalary');
-  let salaryAmount = 0
+  // console.log('inside setUpTotalSalary');
+  let annualSalaryAmount = 0
 
   for (employee of staff) {  
-    salaryAmount += Number(employee.salary);
-    console.log('Salary is', salaryAmount)
+    annualSalaryAmount += Number(employee.salary);
+    console.log('Salary is', annualSalaryAmount)
+  }
+
+  let monthlySalaryAmount = 0
+  monthlySalaryAmount = (annualSalaryAmount / 12).toFixed(2)
+  // after mucking about with toLocaleString for awhile with no luck, the below puts commas where they go.
+  moddedMonthly = monthlySalaryAmount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+
+  if (monthlySalaryAmount > 20000) {
+    $('#totalSalary').css('background-color', 'red');
+    
   }
   // pull combined salary's into total variable.
   // may not be needed.
   $('#totalSalary').html(`
-  <h3 id="totalSalary">Total Monthly: $${salaryAmount}.00</h3>
+  <h3 id="totalSalary">Total Monthly: $${moddedMonthly}</h3>
   `)
 }
