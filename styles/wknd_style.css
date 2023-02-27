@@ -1,3 +1,10 @@
+h1 { 
+    text-align: center;
+    background-color: gray;
+    color: white;
+    padding: 2rem
+}
+
 table {
     font-size: 18px;
     border: 1px solid black;
