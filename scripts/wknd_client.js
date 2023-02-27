@@ -119,6 +119,9 @@ function pinkSlipper() {
   // render staff without the removed employee.
   render()
 }
+// alternate method of IDing individual table entries - 
+// create button with property of data-id"${staff[i].id}" eg. 
+// then do variable = $(this).data().id in lieu o the 
 
 function render(){
   // Xconsole.log('Inside render.')
@@ -127,28 +130,30 @@ function render(){
   // update the DOM
   setUpTable();
   // loop through staff to add employees to table.
-    for (let i=0; i<staff.length; i++) {
-      // Xconsole.log('employee i#', i)
-      moddedEmployeeSalary = staff[i].salary.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-      $('.staff-table').append(`
-      <tr id='${i}'>
-        <td class='staff-table-entry'>${staff[i].first}</td>
-        <td class='staff-table-entry'>${staff[i].last}</td>
-        <td class='staff-table-entry'>${staff[i].id}</td>
-        <td class='staff-table-entry'>${staff[i].title}</td>
-        <td class='staff-sal-entry'>$ ${moddedEmployeeSalary}</td>
-        <td class='staff-table-entry'>
-          <button class='deleteBtn'>
-          Delete Employee
-          </button>
-        </td>
-      </tr>
-      `
-    )}
+  // this is done by setUpTable.
+    // for (let i=0; i<staff.length; i++) {
+    //   // Xconsole.log('employee i#', i)
+    //   moddedEmployeeSalary = staff[i].salary.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+    //   $('.staff-table').append(`
+    //   <tr id='${i}'>
+    //     <td class='staff-table-entry'>${staff[i].first}</td>
+    //     <td class='staff-table-entry'>${staff[i].last}</td>
+    //     <td class='staff-table-entry'>${staff[i].id}</td>
+    //     <td class='staff-table-entry'>${staff[i].title}</td>
+    //     <td class='staff-sal-entry'>$ ${moddedEmployeeSalary}</td>
+    //     <td class='staff-table-entry'>
+    //       <button class='deleteBtn'>
+    //       Delete Employee
+    //       </button>
+    //     </td>
+    //   </tr>
+    //   `
+    // )}
 
   // create total salary below table.
   setUpTotalSalary();
 }
+
 
 function setUpTable() {
   // empty table and recreate headers
@@ -185,7 +190,7 @@ function setUpTotalSalary() {
   // after mucking about with toLocaleString for awhile with no luck, the below puts commas where they go.
   // found on stack overflow. Cannot make heads or tails of it personally but seems to work.
   moddedMonthly = monthlySalaryAmount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-
+  
   // check if monthly salary amount is > or < 20,000 and change background color
   // as appropriate
   if (monthlySalaryAmount > 20000) {
